@@ -49,5 +49,28 @@ FROM patient_demographics;
 SELECT REPLACE(visit_type, 'OPD', 'Outpatient') AS visit_type
 FROM patient_metrics;
 
+--13. TRIM() : Removes leading and trailing spaces.
+SELECT patient_id,TRIM(first_name) AS clean_first_name,
+FROM patient_demographics;
+
+--14. LPAD() :Pads text on the left.
+SELECT LPAD(patient_id::TEXT, 5, '0') -- output has 5 char, pad with '0'
+FROM patient_demographics;
+
+--15. 17. RPAD() : Pads text on the right.
+SELECT RPAD(first_name, 10, '.') -- output has 10 char, pad with '.'
+FROM patient_demographics;
+
+--16. REVERSE() :Reverses text.
+SELECT REVERSE(first_name)
+FROM patient_demographics; 
+
+-- Example of a use case: 
+SELECT
+    INITCAP(TRIM(first_name)) AS first_name,
+    INITCAP(TRIM(last_name)) AS last_name,
+    UPPER(TRIM(gender)) AS gender
+FROM patient_demographics;
+
 
 
