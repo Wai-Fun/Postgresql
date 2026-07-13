@@ -4,6 +4,7 @@ Stored Procedure and scheduled procedure.
 - A procedure is a reusable workflow that performs actions. 
 - Procedure does not simplify the query, but it standadize the work flow. 
 - A procedure can be automated using cron.schedule
+- In Postgresql: Database >> Schemas >> Public >> Procedues
 
 Usage example: 
 - Monthly report: e.g. create summary table
