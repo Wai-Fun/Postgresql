@@ -1,9 +1,9 @@
 /*
-Stored Procedure 
--a named block of SQL code that can be executed whenever needed.
--vA procedure is a reusable workflow that performs actions. 
+Stored Procedure and scheduled procedure. 
+- a named block of SQL code that can be executed whenever needed.
+- A procedure is a reusable workflow that performs actions. 
 - Procedure does not simplify the query, but it standadize the work flow. 
-Stored procedure is available : Database>> Schemas >> public >> Procedures; Final report could be store in 'Tables'. 
+- A procedure can be automated using cron.schedule
 
 Usage example: 
 - Monthly report: e.g. create summary table
@@ -19,9 +19,9 @@ BEGIN
     -- SQL statements
 END;
 $$;
+____________________________________________________________________________________________________________________________________________________________
 
-
--- Example 1: Insert Data
+-- Example 1: Generate Obesity Alert
 
 DROP TABLE IF EXISTS pateint_alerts;
 CREATE TABLE patient_alerts (
@@ -58,6 +58,7 @@ CALL generate_obesity_alerts();
 SELECT *
 FROM patient_alerts; 
 
+_______________________________________________________________________________________________________________________________________________________
 
 --Example 2. Generate Monthly Report 
 
@@ -100,6 +101,25 @@ CALL generate_monthly_high_risk_report();
 --View the Report
 SELECT *
 FROM patient_risk_alerts;
+
+____________________________________________________________________________
+--Automated the procedure: 
+
+SELECT cron.schedule(
+    'monthly report',
+    '0 0 1 * *',
+    'CALL generate_monthly_high_risk_report();'
+);
+
+/*
+At midnight
+on the first day
+of every month
+
+run:
+CALL generate_monthly_high_risk_report()
+*/
+
 
 
 
